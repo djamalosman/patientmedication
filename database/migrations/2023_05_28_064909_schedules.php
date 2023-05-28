@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('schedules', function (Blueprint $table) {
+            $table->increments('id_schedule');
+            $table->string('transactionnumber',50);
+            $table->string('transactiondate',50);
+            $table->foreign('id_pasien')->references('id_pasien')->on('pasiens');
+            $table->text('description');
+        });
+        DB::statement("ALTER TABLE schedules AUTO_INCREMENT = 14000;");
     }
 
     /**
@@ -23,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('schedules');
     }
 };
