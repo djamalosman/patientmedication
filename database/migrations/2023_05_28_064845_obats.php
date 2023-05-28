@@ -13,7 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('obats', function (Blueprint $table) {
+            $table->increments('id_obat');
+            $table->string('code',50);
+            $table->string('name',50);
+            $table->string('alamat',50);
+            $table->string('satuan',50);
+            $table->string('category',50);
+            $table->string('brand',50);
+            $table->text('description');
+        });
+        DB::statement("ALTER TABLE obats AUTO_INCREMENT = 14000;");
     }
 
     /**
@@ -23,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('obats');
     }
 };
