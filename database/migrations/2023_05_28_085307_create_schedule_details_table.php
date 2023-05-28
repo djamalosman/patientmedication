@@ -14,15 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('schedule_details', function (Blueprint $table) {
-            $table->increments('id_schedule_details');
+            $table->integer('id_schedule_details');
             $table->string('transactionnumber',50);
-            $table->foreign('id_obat')->references('id_obat')->on('obats');
+            $table->integer('id_obat')->references('id_obat')->on('obats');
             $table->integer('Qty_hari');
             $table->dateTime('stardate');
             $table->dateTime('enddate');
             $table->text('aturanpakai');
         });
-        DB::statement("ALTER TABLE schedule_details AUTO_INCREMENT = 14000;");
     }
 
     /**
