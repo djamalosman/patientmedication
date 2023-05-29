@@ -37,4 +37,5 @@ Route::get('obat/index', [ObatController::class, 'index'])->name('obat/index');
 Route::get('/viewsaveobat', [ObatController::class, 'viewsSave'])->name('viewsaveobat');
 Route::post('obatsave', [ObatController::class, 'store'])->name('obatsave');
 Route::get('/detailsobat/{id_obat}', [ObatController::class, 'detailobat'])->name('detailsobat');
-Route::get('/viewupdate/{id_obat}', [ObatController::class, 'viewsUpdate'])->name('viewupdate');
+Route::get('/viewupdateobat/{id_obat}', [ObatController::class, 'viewsUpdate'])->name('viewupdateobat');
+Route::put('/obatupdate/{id_obat}', [ObatController::class, 'update'])->name('obatupdate');

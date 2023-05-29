@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+         //$status=1;
+         //return view('home',['status'=>$status]);
+        $status = 1;
+        return view('home', compact('status'));
     }
 }

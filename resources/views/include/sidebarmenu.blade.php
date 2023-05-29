@@ -1,3 +1,4 @@
+
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active ps ps--active-y">
             <div class="sidebar-header position-relative">
@@ -22,7 +23,11 @@
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
                     
-                    <li class="sidebar-item active ">
+                    <li class=
+                        @if($status == 1)
+                        "sidebar-item active"
+                        @endif
+                    >
                         <a href="index.html" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
@@ -32,17 +37,29 @@
                     
                     {{-- <li class="sidebar-title">Forms &amp; Tables</li> --}}
                     
-                    <li class="sidebar-item  has-sub">
+                    <li class="sidebar-item
+                                     @if($status == 2 || $status == 3)
+                                        active
+                                    @endif has-sub">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-hexagon-fill"></i>
                             <span>Form Input</span>
                         </a>
-                        <ul class="submenu ">
-                            <li class="submenu-item ">
+                        <ul class="submenu 
+                            @if($status == 2 || $status == 3)
+                                active
+                            @endif ">
+                            <li class="submenu-item
+                                @if($status == 2)
+                                    active
+                                @endif ">
                                 <a href="/obat/index">Obat</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="pasien/index">Pasien</a>
+                            <li class="submenu-item
+                                @if($status == 3)
+                                    active
+                                @endif ">
+                                <a href="/pasien/index">Pasien</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-input.html">Jadwal Obat Pasien</a>

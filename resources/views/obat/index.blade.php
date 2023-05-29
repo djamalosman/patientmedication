@@ -43,14 +43,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datapasien as $data)
+                        @foreach ($getData as $data)
                             <tr>
                                 <td>{{$data->code}}</td>
                                 <td>{{$data->name}}</td>
                                 <td>{{$data->satuan}}</td>
                                 <td>
                                     <a href ="/detailsobat/{{$data->id_obat}}"><span class="badge bg-success">Detail</span></a>
-                                    <a href ="/viewupdate/{{$data->id_obat}}"><span class="badge bg-primary">Update</span></a>
+                                    <a href ="/viewupdateobat/{{$data->id_obat}}"><span class="badge bg-primary">Update</span></a>
                                 </td>
                             </tr>
                         @endforeach

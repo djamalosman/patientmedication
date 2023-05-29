@@ -35,17 +35,22 @@ class ObatController extends Controller
      {
          $data= new MasterObat;
          $getData = $data->selectAllData();
-         return view('obat.index', ['datapasien'=>$getData]);
+         $status = 2;
+        return view('obat.index', compact('getData','status'));
+        //eturn view('obat.index', ['datapasien'=>$getData]);
      }
 
      function viewsSave(Type $var = null)
      {
          //select option : Pasien::select('id','name')->get();
-         return view('obat.create');
+         //return view('obat.create');
+         $status = 2;
+         return view('obat.create', compact('status'));
      }
 
      function store(Request $request){
         try {
+            
             $data= new MasterObat;
             $insertData = $data->insertData($request);
             
@@ -61,16 +66,33 @@ class ObatController extends Controller
     {
         
         $data= new MasterObat;
-        $getDataById= $data->selectById($id_obat);
-        return view('obat/detail', ['getDataDetails'=>$getDataById]);
+        $getDataDetails= $data->selectById($id_obat);
+        $status = 2;
+        return view('obat.detail', compact('getDataDetails','status'));
+        //return view('obat/detail', ['getDataDetails'=>$getDataById]);
     }
 
     function viewsUpdate($id_obat)
     {
         //select option : Pasien::select('id','name')->get();
         $data= new MasterObat;
-        $getDataById= $data->selectById($id_obat);
-        return view('obat/update', ['getDataDetails'=>$getDataById]);
+        $getDataDetails= $data->selectById($id_obat);
+        $status = 2;
+        return view('obat.update', compact('getDataDetails','status'));
+        //return view('obat/update', ['getDataDetails'=>$getDataById]);
+    }
+
+    function update(Request $request, $id_obat){
+        
+        try {
+            $data=MasterObat::find($id_obat);
+            $data->update($request->all());
+            return redirect()->route('obat/index')->with('message', 'Update Data Successfully');
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->route('obat/index')->with('message', 'Update Data Failed');
+        }
     }
 
 }

@@ -6,7 +6,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Validation</h3>
+                <h3>Form Pasien</h3>
                 <p class="text-subtitle text-muted">...</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -27,7 +27,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Multiple Column</h4>
+                        <h4 class="card-title">Input Pasien</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">

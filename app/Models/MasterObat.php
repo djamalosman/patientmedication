@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class MasterObat extends Model
 {
@@ -31,7 +34,6 @@ class MasterObat extends Model
                 'category' => $request->category,
                 'brand' => $request->brand,
                 'description' => $request->description,
-
             ]);
           return  DB::commit();
     }
