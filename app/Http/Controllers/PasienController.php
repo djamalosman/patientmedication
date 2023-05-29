@@ -36,13 +36,17 @@ class PasienController extends Controller
     {
         $data= new Pasien;
         $getData = $data->selectAllData();
-        return view('pasien.index', ['datapasien'=>$getData]);
+        $status = 3;
+        return view('pasien.index', compact('getData','status'));
+        //return view('pasien.index', ['datapasien'=>$getData]);
     }
 
     function viewsSave(Type $var = null)
     {
         //select option : Pasien::select('id','name')->get();
-        return view('pasien.create');
+        //return view('pasien.create');
+        $status = 3;
+        return view('pasien.create', compact('status'));
     }
 
     function store(Request $request){
@@ -62,9 +66,11 @@ class PasienController extends Controller
     function viewsUpdate($id_pasien)
     {
         //select option : Pasien::select('id','name')->get();
+        //return view('pasien/update', ['getDataDetails'=>$getDataById]);
         $data= new Pasien;
-        $getDataById= $data->selectById($id_pasien);
-        return view('pasien/update', ['getDataDetails'=>$getDataById]);
+        $getDataDetails= $data->selectById($id_pasien);
+        $status = 3;
+        return view('pasien.update', compact('getDataDetails','status'));
     }
     function update(Request $request, $id_pasien){
         
@@ -84,7 +90,9 @@ class PasienController extends Controller
     {
         
         $data= new Pasien;
-        $getDataById= $data->selectById($id_pasien);
-        return view('pasien/detail', ['getDataDetails'=>$getDataById]);
+        $getDataDetails= $data->selectById($id_pasien);
+        $status = 3;
+        return view('pasien.update', compact('getDataDetails','status'));
+        //return view('pasien/detail', ['getDataDetails'=>$getDataById]);
     }
 }

@@ -5,7 +5,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Detail Obat</h3>
+                <h3>Form Detail Obat</h3>
                 <p class="text-subtitle text-muted">...</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -13,7 +13,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Data</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Detail</li>
-                        <li class="breadcrumb-item active" aria-current="page">Pasien</li>
+                        <li class="breadcrumb-item active" aria-current="page">Obat</li>
                     </ol>
                 </nav>
             </div>
@@ -26,51 +26,40 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Detail Pasein</h4>
+                        <h4 class="card-title">Detail Obat</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group mandatory">
-                                            <label for="first-name-column" class="form-label">Kode Pasien</label>
+                                            <label for="first-name-column" class="form-label">Kode Obat</label>
                                             <input type="text" id="last-name-column" class="form-control" placeholder="Nama Passien" name="namepasien"disabled value="{{$getDataDetails->code}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="last-name-column" class="form-label">Nama Passien</label>
+                                            <label for="last-name-column" class="form-label">Nama Obat</label>
                                             <input type="text" id="last-name-column" class="form-control" placeholder="Nama Passien" name="namepasien"disabled value="{{$getDataDetails->name}}">
                                         </div>
                                     </div>
+                                                                      
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="city-column" class="form-label">No Ktp</label>
-                                            <input type="number" id="city-column" class="form-control" placeholder="No Ktp" name="noktp" disabled value="{{$getDataDetails->no_ktp}}">
-                                        </div>
-                                    </div>                                    
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="country-floating" class="form-label">Tempat lahir</label>
-                                            <input type="text" id="country-floating" class="form-control" name="tempatlahir" placeholder="Tempat Lahir" disabled value="{{$getDataDetails->tempatlahir}}">
+                                            <label for="city-column" class="form-label">Satuan</label>
+                                            <input type="text" id="city-column" class="form-control" placeholder="satuan" name="satuan" data-parsley-required="true"value="{{$getDataDetails->satuan}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="company-column" class="form-label">Tanggal lahir</label>
-                                            <input type="date" id="company-column" class="form-control" name="tgllhr" placeholder="Tanggal Lahir" disabled value="{{$getDataDetails->tgllahir}}">
+                                            <label for="city-column" class="form-label">Category</label>
+                                            <input type="text" id="city-column" class="form-control" placeholder="Category" name="category" data-parsley-required="true"value="{{$getDataDetails->category}}">
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group mandatory">
-                                            <label for="email-id-column" class="form-label">Kota</label>
-                                            <input type="text" id="last-name-column" class="form-control" placeholder="Nama Passien" name="namepasien"disabled value="{{$getDataDetails->kota}}">
-                                        </div>
-                                    </div>
+                                    </div>                     
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="city-column" class="form-label">Alamat</label>
-                                            <input type="text" id="city-column" class="form-control" placeholder="Alamat" name="alamat"disabled value="{{$getDataDetails->alamat}}">
+                                            <label for="city-column" class="form-label">Brand</label>
+                                            <input type="text" id="city-column" class="form-control" placeholder="Brand" name="brand" data-parsley-required="true"value="{{$getDataDetails->brand}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -82,7 +71,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button class="btn btn-light-info me-1 mb-1"><a href ="/pasien/index">Back</a></button>
+                                        <button class="btn btn-light-info me-1 mb-1"><a href ="/obat/index">Back</a></button>
                                     </div>
                                 </div>
                         </div>

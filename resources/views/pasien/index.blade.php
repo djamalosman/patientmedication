@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datapasien as $data)
+                        @foreach ($getData as $data)
                             <tr>
                                 <td>{{$data->code}}</td>
                                 <td>{{$data->name}}</td>

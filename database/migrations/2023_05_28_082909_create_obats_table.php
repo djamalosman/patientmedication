@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('id_obat');
             $table->string('code',50);
             $table->string('name',50);
-            $table->string('alamat',50);
             $table->string('satuan',50);
             $table->string('category',50);
             $table->string('brand',50);
