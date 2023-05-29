@@ -34,8 +34,9 @@
                 </div>
                 <div>
 
-                    <form action="{{ route('Pasien.store') }}" onsubmit="validateForm()" method="POST" enctype="multipart/form-data" id="form">
+                    <form action="{{ route('Pasien.update',$data->id) }}" onsubmit="validateForm()" method="POST" enctype="multipart/form-data" id="form">
                         @csrf
+                        @method('put')
                         <section id="multiple-column-form">
                             <div class="row match-height">
                                 <div class="col-12">
@@ -50,14 +51,14 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="code"
-                                                                    name="code" placeholder="Auto" readonly required>
+                                                                    name="code" value="{{$data->code}}" readonly required>
                                                             </div>
                                                             <div class="col-md-1">
                                                                 <label>Name *</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="name"
-                                                                    name="name" required>
+                                                                    name="name" value="{{$data->name}}"  required>
                                                             </div>
 
                                                      
@@ -66,7 +67,7 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" id="alamat" class="form-control"
-                                                                    name="alamat" >
+                                                                    name="alamat" value="{{$data->alamat}}" >
                                                             </div>
 
                                                             <div class="col-md-1">
@@ -74,7 +75,7 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="tempat"
-                                                                    name="tempat" >
+                                                                    name="tempat" value="{{$data->tempat}}">
                                                             </div>
 
                                                             <div class="col-md-1">
@@ -82,7 +83,7 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="date" class="form-control" id="tgllahir"
-                                                                    name="tgllahir" value="{{ now()->format('Y-m-d') }}">
+                                                                    name="tgllahir" value="{{ date('Y-m-d'),strtotime($data->alamat)}}">
                                                             </div>
 
                                                   
@@ -93,14 +94,14 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" id="ktp" class="form-control"
-                                                                    name="ktp" >
+                                                                    name="ktp" value="{{$data->ktp}}">
                                                             </div>
                                                             <div class="col-md-1">
                                                                 <label>Kota</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" id="kota" class="form-control"
-                                                                    name="kota">
+                                                                    name="kota" value="{{$data->kota}}">
                                                             </div>
 
                                                             <div class="col-md-1">
@@ -108,7 +109,7 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" id="phone" class="form-control"
-                                                                    name="phone" required>
+                                                                    name="phone" value="{{$data->phone}}" required>
                                                             </div>
 
 

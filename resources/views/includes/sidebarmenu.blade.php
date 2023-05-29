@@ -39,10 +39,10 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="/obat/index">Obat</a>
+                                <a href="{{ route('Obat') }}">Obat</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="pasien/index">Pasien</a>
+                                <a href="{{ route('Pasien') }}">Pasien</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-input.html">Jadwal Obat Pasien</a>
