@@ -35,7 +35,7 @@ Parsley.on("field:validated", function (el) {
         if (errorNode.length > 0) {
           var lblText = lblNode.text();
           if (lblText) {
-            errorNode.html(lblText + " is required.");
+            errorNode.html(lblText + " Tidak boleh kosong.");
           }
         }
       }
