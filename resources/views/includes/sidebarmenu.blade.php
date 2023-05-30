@@ -1,7 +1,30 @@
+
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active ps ps--active-y">
             <div class="sidebar-header position-relative">
                 <div class="d-flex justify-content-between align-items-center">
+                    {{-- <div class="btn-group mb-1">
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Profile
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                    </form>
+                           
+                            </div>
+                        </div>
+                    </div> --}}
                     {{-- <div class="logo">
                         <a href="index.html"><img src="{{('assets/images/logo/logo.svg')}}" alt="Logo" srcset=""></a>
                     </div> --}}
@@ -16,13 +39,18 @@
                     <div class="sidebar-toggler  x">
                         <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                     </div>
+                    
                 </div>
             </div>
             <div class="sidebar-menu">
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
                     
-                    <li class="sidebar-item active ">
+                    <li class=
+                        @if($status == 1)
+                        "sidebar-item active"
+                        @endif
+                    >
                         <a href="index.html" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
@@ -32,24 +60,49 @@
                     
                     {{-- <li class="sidebar-title">Forms &amp; Tables</li> --}}
                     
-                    <li class="sidebar-item  has-sub">
+                    <li class="sidebar-item
+                                     @if($status == 2 || $status == 3)
+                                        active
+                                    @endif has-sub">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-hexagon-fill"></i>
                             <span>Form Input</span>
                         </a>
-                        <ul class="submenu ">
-                            <li class="submenu-item ">
-                                <a href="{{ route('Obat') }}">Obat</a>
+                        <ul class="submenu 
+                            @if($status == 2 || $status == 3)
+                                active
+                            @endif ">
+                            <li class="submenu-item
+                                @if($status == 2)
+                                    active
+                                @endif ">
+                                <a href="/Obat">Obat</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="{{ route('Pasien') }}">Pasien</a>
+                            <li class="submenu-item
+                                @if($status == 3)
+                                    active
+                                @endif ">
+                                <a href="/Pasien">Pasien</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-input.html">Jadwal Obat Pasien</a>
                             </li>
                         </ul>
                     </li>
-                    
+                    <li
+                        class="sidebar-item ">
+                        <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();" {{ __('Logout') }} class='sidebar-link'>
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Logout</span>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                               
+                                </form>
+                                <a href="{{ route('logout') }}" class="sidebar-link"></a>
+                        </a>
+                    </li>
                     
                     {{-- <li class="sidebar-item  ">
                             <a class="dropdown-item" href="{{ route('logout') }}"

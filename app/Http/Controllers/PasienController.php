@@ -16,13 +16,15 @@ class PasienController extends Controller
     {
 
         $data =  Pasien::where('deletestatus', 0)->get();
-        return view('pasien.index', compact('data'));
+        $status = 3;
+        return view('pasien.index', compact('data','status'));
     }
 
 
     function create()
     {
-        return view('pasien.create');
+        $status = 3;
+        return view('pasien.create',compact('status'));
     }
 
 
@@ -73,12 +75,13 @@ class PasienController extends Controller
     {
 
         $data = Pasien::find($id);
-        return view('pasien.edit',compact('data'));
+        $status = 3;
+        return view('pasien.edit',compact('data','status'));
     }
 
 
 
-    public function update(Request $request, $id)
+    public function update($id,Request $request)
     {
         try {
             DB::beginTransaction();
@@ -88,18 +91,31 @@ class PasienController extends Controller
 
             ]);
             if ($validatedData) {
-                Pasien::where('id', $id)->update([
+                // Pasien::where('id', $id)->update([
        
-                    'name' => $request->name,
-                    'alamat' => $request->alamat,
-                    'tempat' => $request->tempat,
-                    'tgllahir' => $request->tgllahir,
-                    'kota' => $request->kota,
-                    'ktp' => $request->ktp,
-                    'phone' => $request->phone,
-                    'updated_by' => Auth::user()->name
+                //     'name' => $request->name,
+                //     'alamat' => $request->alamat,
+                //     'tempat' => $request->tempat,
+                //     'tgllahir' => $request->tgllahir,
+                //     'kota' => $request->kota,
+                //     'ktp' => $request->ktp,
+                //     'phone' => $request->phone,
+                //     'updated_by' => Auth::user()->name
 
-                ]);
+                // ]);
+
+                $flight = Pasien::find($id);
+                    $flight->code =$getNumber;
+                    $flight->name = $request->name;
+                    $flight->alamat = $request->alamat;
+                    $flight->tempat = $request->tempat;
+                    $flight->tgllahir = $request->tgllahir;
+                    $flight->kota=$request->kota;
+                    $flight->ktp=$request->ktp;
+                    $flight->phone=$request->phone;
+                    $flight->updated_by = Auth::user()->name; 
+                    $flight->save();
+                    
              
                 DB::commit();
                 return response()->json([

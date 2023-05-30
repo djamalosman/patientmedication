@@ -34,8 +34,9 @@
                 </div>
                 <div>
 
-                    <form action="{{ route('Obat.store') }}" onsubmit="validateForm()" method="POST" enctype="multipart/form-data" id="form">
+                    <form action="{{ route('Obat.update',$data->id) }}" onsubmit="validateForm()" method="POST" enctype="multipart/form-data" id="form">
                         @csrf
+                        @method('put')
                         <section id="multiple-column-form">
                             <div class="row match-height">
                                 <div class="col-12">
@@ -50,22 +51,23 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="code"
-                                                                    name="code" placeholder="Auto" readonly required>
+                                                                    name="code" value="{{$data->code}}" readonly required>
                                                             </div>
                                                             <div class="col-md-1">
                                                                 <label>Name *</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="name"
-                                                                    name="name" required>
+                                                                    name="name" value="{{$data->name}}"  required>
                                                             </div>
 
+                                                     
                                                             <div class="col-md-1">
                                                                 <label>Brand</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" id="brand" class="form-control"
-                                                                    name="brand" >
+                                                                    name="brand" value="{{$data->brand}}">
                                                             </div>
 
                                                             <div class="col-md-1">
@@ -73,7 +75,7 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="category"
-                                                                    name="category" required>
+                                                                    name="category" value="{{$data->category}}">
                                                             </div>
 
                                                             <div class="col-md-1">
@@ -81,7 +83,7 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="satuan"
-                                                                    name="satuan" >
+                                                                    name="satuan" value="{{$data->satuan}}">
                                                             </div>
                                                             
                                                             <div class="col-md-1">
@@ -89,10 +91,9 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="description"
-                                                                    name="description" >
+                                                                    name="description" value="{{$data->description}}">
                                                                 {{-- <textarea class="form-control" name="description" id="description" ></textarea> --}}
                                                             </div>
-
 
 
                                                     </div>
@@ -180,7 +181,7 @@
 
         function validateForm() {
             var name = document.getElementById("name").value;
-            var category = document.getElementById("category").value;
+            var name = document.getElementById("category").value;
             if (input == "") {
                 alert("Input text cannot be empty!");
                 return false;
@@ -213,7 +214,8 @@
 
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
                 }
             });
             $.ajax({

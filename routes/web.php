@@ -19,7 +19,7 @@ use App\Http\Controllers\ObatController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
@@ -36,5 +36,6 @@ Route::get('Obat', [ObatController::class, 'index'])->name('Obat');
 Route::get('Obat/create', [ObatController::class, 'create'])->name('Obat.create');
 Route::post('Obat/store', [ObatController::class, 'store'])->name('Obat.store');
 Route::get('/Obat/edit/{id}', [ObatController::class, 'edit'])->where('number', '.*');
-Route::put('Obat/update/{number}', [ObatController::class, 'update'])->where('number', '.*')->name('Obat.update');
+//Route::put('Obat/update/{id}', [ObatController::class, 'update'])->where('id', '.*')->name('Obat.update');
+Route::put('Obat/update/{id}', [ObatController::class, 'update'])->name('Obat.update');
 Route::put('Obat/delete/{id}', [ObatController::class, 'delete'])->name('Obat.delete');
