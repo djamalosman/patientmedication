@@ -2,97 +2,149 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pasien;
-
 use DateTime;
+use App\Models\Pasien;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
-use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
+use App\Helpers\GenerateNumberHelpers;
 
 class PasienController extends Controller
 {
-    
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    function index(Request $request)
     {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    
-    function index(Request $request )
-    {
-        $data= new Pasien;
-        $getData = $data->selectAllData();
+        $data =  Pasien::where('deletestatus', 0)->get();
         $status = 3;
-        return view('pasien.index', compact('getData','status'));
-        //return view('pasien.index', ['datapasien'=>$getData]);
+        return view('pasien.index', compact('data','status'));
     }
 
-    function viewsSave(Type $var = null)
+
+    function create()
     {
-        //select option : Pasien::select('id','name')->get();
-        //return view('pasien.create');
         $status = 3;
-        return view('pasien.create', compact('status'));
+        return view('pasien.create',compact('status'));
     }
 
-    function store(Request $request){
+
+    public function store(Request $request)
+    {
+    
         try {
-            $data= new Pasien;
-            $insertData = $data->insertData($request);
-            
-            return redirect()->route('pasien/index')->with('message', 'Save Data Successfully');
+            DB::beginTransaction();
+            $getNumber = GenerateNumberHelpers::Pasien();
+            $validatedData = $request->validate([
+                'name' => ['required', Rule::unique('m_pasien', 'name')]
 
+            ]);
+            if ($validatedData) {
+                Pasien::create([
+                    'code' => $getNumber,
+                    'name' => $request->name,
+                    'alamat' => $request->alamat,
+                    'tempat' => $request->tempat,
+                    'tgllahir' => $request->tgllahir,
+                    'kota' => $request->kota,
+                    'ktp' => $request->ktp,
+                    'phone' => $request->phone,
+                    'created_by' => Auth::user()->name,            
+                    'deletestatus' => 0,
+
+                ]);
+             
+                DB::commit();
+                return response()->json([
+                    'url' => url('Pasien'),
+                    'message' => 'Simpan Data Berhasil'
+                ]);
+            }
         } catch (\Throwable $th) {
-            DB::rollback();
-            return redirect()->route('pasien/index')->with('message', 'Save Data Failed');
+            DB::rollBack();
+            return response()->json([
+                'url' => url('Pasien'),
+                'message' => 'Simpan Data Gagal!!'
+            ]);
         }
     }
-    
-    
-    function viewsUpdate($id_pasien)
+
+
+
+
+    function edit($id)
     {
-        //select option : Pasien::select('id','name')->get();
-        //return view('pasien/update', ['getDataDetails'=>$getDataById]);
-        $data= new Pasien;
-        $getDataDetails= $data->selectById($id_pasien);
+
+        $data = Pasien::find($id);
         $status = 3;
-        return view('pasien.update', compact('getDataDetails','status'));
+        return view('pasien.edit',compact('data','status'));
     }
-    function update(Request $request, $id_pasien){
-        
+
+
+
+    public function update($id,Request $request)
+    {
         try {
-            $data=Pasien::find($id_pasien);
-            $data->update($request->all());
-            return redirect()->route('pasien/index')->with('message', 'Update Data Successfully');
+            DB::beginTransaction();
+            $getNumber = GenerateNumberHelpers::Pasien();
+            $validatedData = $request->validate([
+                'name' => ['required', Rule::unique('m_pasien', 'name')]
 
+            ]);
+            if ($validatedData) {
+                // Pasien::where('id', $id)->update([
+       
+                //     'name' => $request->name,
+                //     'alamat' => $request->alamat,
+                //     'tempat' => $request->tempat,
+                //     'tgllahir' => $request->tgllahir,
+                //     'kota' => $request->kota,
+                //     'ktp' => $request->ktp,
+                //     'phone' => $request->phone,
+                //     'updated_by' => Auth::user()->name
+
+                // ]);
+
+                $flight = Pasien::find($id);
+                    $flight->code =$getNumber;
+                    $flight->name = $request->name;
+                    $flight->alamat = $request->alamat;
+                    $flight->tempat = $request->tempat;
+                    $flight->tgllahir = $request->tgllahir;
+                    $flight->kota=$request->kota;
+                    $flight->ktp=$request->ktp;
+                    $flight->phone=$request->phone;
+                    $flight->updated_by = Auth::user()->name; 
+                    $flight->save();
+                    
+             
+                DB::commit();
+                return response()->json([
+                    'url' => url('Pasien'),
+                    'message' => 'Update Data Berhasil'
+                ]);
+            }
         } catch (\Throwable $th) {
-            DB::rollback();
-            return redirect()->route('pasien/index')->with('message', 'Update Data Failed');
+            DB::rollBack();
+            return response()->json([
+                'url' => url('Pasien'),
+                'message' => 'Update Data Gagal!!'
+            ]);
         }
-    }
-    
 
-    function detailpasien($id_pasien)
-    {
-        
-        $data= new Pasien;
-        $getDataDetails= $data->selectById($id_pasien);
-        $status = 3;
-        return view('pasien.update', compact('getDataDetails','status'));
-        //return view('pasien/detail', ['getDataDetails'=>$getDataById]);
     }
+
+    public function delete($id)
+    {
+
+        $current_date = new DateTime();
+        Pasien::where('id', $id)
+            ->update([
+                'deletestatus' => 1,               
+            ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Delete Data Successfully'
+        ]);
+    }
+
 }

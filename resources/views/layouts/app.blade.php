@@ -7,24 +7,19 @@
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <title>@yield('title')</title>
     @stack('before-style')
-    @include('include.style')
+    @include('includes.style')
     @stack('after-style')
 
 </head>
 
 <body>
-    <div id="app">
-        <div id="main">
-            @include('include.sidebarmenu')
+    @include('includes.sidebarmenu')
 
-            @yield('content')
-            
-            @include('include.footer')
-        </div>
-    </div>
-        @stack('before-script')
-        @include('include.script')
-        @stack('after-script')
+    @yield('content')
+
+    @stack('before-script')
+    @include('includes.script')
+    @stack('after-script')
 
 </body>
 

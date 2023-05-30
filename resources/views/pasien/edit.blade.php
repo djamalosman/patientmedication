@@ -26,7 +26,7 @@
                                 <ol class="breadcrumb">
 
                                     <li class="breadcrumb-item"><a href="#">Master</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Obat</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Pasien</li>
                                 </ol>
                             </nav>
                         </div>
@@ -34,8 +34,9 @@
                 </div>
                 <div>
 
-                    <form action="{{ route('Obat.store') }}" onsubmit="validateForm()" method="POST" enctype="multipart/form-data" id="form">
+                    <form action="{{ route('Pasien.update',$data->id) }}" onsubmit="validateForm()" method="POST" enctype="multipart/form-data" id="form">
                         @csrf
+                        @method('put')
                         <section id="multiple-column-form">
                             <div class="row match-height">
                                 <div class="col-12">
@@ -50,47 +51,65 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="code"
-                                                                    name="code" placeholder="Auto" readonly required>
+                                                                    name="code" value="{{$data->code}}" readonly required>
                                                             </div>
                                                             <div class="col-md-1">
                                                                 <label>Name *</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="text" class="form-control" id="name"
-                                                                    name="name" required>
+                                                                    name="name" value="{{$data->name}}"  required>
+                                                            </div>
+
+                                                     
+                                                            <div class="col-md-1">
+                                                                <label>Alamat</label>
+                                                            </div>
+                                                            <div class="col-md-5 form-group">
+                                                                <input type="text" id="alamat" class="form-control"
+                                                                    name="alamat" value="{{$data->alamat}}" >
                                                             </div>
 
                                                             <div class="col-md-1">
-                                                                <label>Brand</label>
+                                                                <label>Tempat Lahir</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
-                                                                <input type="text" id="brand" class="form-control"
-                                                                    name="brand" >
+                                                                <input type="text" class="form-control" id="tempat"
+                                                                    name="tempat" value="{{$data->tempat}}">
                                                             </div>
 
                                                             <div class="col-md-1">
-                                                                <label>Category</label>
+                                                                <label>Tgl Lahir</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
-                                                                <input type="text" class="form-control" id="category"
-                                                                    name="category" required>
+                                                                <input type="date" class="form-control" id="tgllahir"
+                                                                    name="tgllahir" value="{{ date('Y-m-d'),strtotime($data->alamat)}}">
+                                                            </div>
+
+                                                  
+                                                                                                       
+
+                                                            <div class="col-md-1">
+                                                                <label>KTP</label>
+                                                            </div>
+                                                            <div class="col-md-5 form-group">
+                                                                <input type="text" id="ktp" class="form-control"
+                                                                    name="ktp" value="{{$data->ktp}}">
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label>Kota</label>
+                                                            </div>
+                                                            <div class="col-md-5 form-group">
+                                                                <input type="text" id="kota" class="form-control"
+                                                                    name="kota" value="{{$data->kota}}">
                                                             </div>
 
                                                             <div class="col-md-1">
-                                                                <label>Satuan</label>
+                                                                <label>Telp</label>
                                                             </div>
                                                             <div class="col-md-5 form-group">
-                                                                <input type="text" class="form-control" id="satuan"
-                                                                    name="satuan" >
-                                                            </div>
-                                                            
-                                                            <div class="col-md-1">
-                                                                <label>Deskripsi</label>
-                                                            </div>
-                                                            <div class="col-md-5 form-group">
-                                                                <input type="text" class="form-control" id="description"
-                                                                    name="description" >
-                                                                {{-- <textarea class="form-control" name="description" id="description" ></textarea> --}}
+                                                                <input type="text" id="phone" class="form-control"
+                                                                    name="phone" value="{{$data->phone}}" required>
                                                             </div>
 
 
@@ -116,7 +135,7 @@
                                                 <div class="col-md-3 col-6">
                                                     <button type="submit" id="btnsubmit"
                                                         class="btn btn-primary">Save</button>
-                                                    <a type="submit" href="{{ route('Obat') }}"
+                                                    <a type="submit" href="{{ route('Pasien') }}"
                                                         class="btn btn-danger">Cancel</a>
 
                                                 </div>
@@ -180,7 +199,7 @@
 
         function validateForm() {
             var name = document.getElementById("name").value;
-            var category = document.getElementById("category").value;
+            var name = document.getElementById("phone").value;
             if (input == "") {
                 alert("Input text cannot be empty!");
                 return false;
@@ -191,14 +210,14 @@
 
         function validateForm() {
             var name = document.getElementById("name").value;
-            var category = document.getElementById("category").value;
+            var phone = document.getElementById("phone").value;
 
             if (name == "") {
                 alert("Nama Kosong !!");
                 return false;
             }
-            if (category == "") {
-                alert("category Kosong !!!");
+            if (phone == "") {
+                alert("Telp Kosong !!!");
                 return false;
             }
             return true;

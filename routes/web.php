@@ -19,23 +19,23 @@ use App\Http\Controllers\ObatController;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-//pasien
-Route::get('pasien/index', [PasienController::class, 'index'])->name('pasien/index');
-Route::get('/viewsave', [PasienController::class, 'viewsSave'])->name('viewsave');
-Route::get('/viewupdate/{id_pasien}', [PasienController::class, 'viewsUpdate'])->name('viewupdate');
-Route::get('/detailspasien/{id_pasien}', [PasienController::class, 'detailpasien'])->name('detailspasien');
-Route::post('pasiensave', [PasienController::class, 'store'])->name('pasiensave');
-Route::put('/pasienupdate/{id_pasien}', [PasienController::class, 'update'])->name('pasienupdate');
 
-//obat
-Route::get('obat/index', [ObatController::class, 'index'])->name('obat/index');
-Route::get('/viewsaveobat', [ObatController::class, 'viewsSave'])->name('viewsaveobat');
-Route::post('obatsave', [ObatController::class, 'store'])->name('obatsave');
-Route::get('/detailsobat/{id_obat}', [ObatController::class, 'detailobat'])->name('detailsobat');
-Route::get('/viewupdateobat/{id_obat}', [ObatController::class, 'viewsUpdate'])->name('viewupdateobat');
-Route::put('/obatupdate/{id_obat}', [ObatController::class, 'update'])->name('obatupdate');
+// Pasien
+Route::get('Pasien', [PasienController::class, 'index'])->name('Pasien');
+Route::get('Pasien/create', [PasienController::class, 'create'])->name('Pasien.create');
+Route::post('Pasien/store', [PasienController::class, 'store'])->name('Pasien.store');
+Route::get('/Pasien/edit/{id}', [PasienController::class, 'edit']);
+Route::put('Pasien/update/{id}', [PasienController::class, 'update'])->name('Pasien.update');
+Route::put('Pasien/delete/{id}', [PasienController::class, 'delete'])->name('Pasien.delete');
+
+// Obat
+Route::get('Obat', [ObatController::class, 'index'])->name('Obat');
+Route::get('Obat/create', [ObatController::class, 'create'])->name('Obat.create');
+Route::post('Obat/store', [ObatController::class, 'store'])->name('Obat.store');
+Route::get('/Obat/edit/{id}', [ObatController::class, 'edit'])->where('number', '.*');
+//Route::put('Obat/update/{id}', [ObatController::class, 'update'])->where('id', '.*')->name('Obat.update');
+Route::put('Obat/update/{id}', [ObatController::class, 'update'])->name('Obat.update');
+Route::put('Obat/delete/{id}', [ObatController::class, 'delete'])->name('Obat.delete');
