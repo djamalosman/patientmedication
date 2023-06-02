@@ -6,6 +6,10 @@ use DateTime;
 use App\Models\Pasien;
 use App\Models\Obat;
 use App\Models\Schedule;
+<<<<<<< HEAD
+=======
+
+>>>>>>> e90795732136f4062f531d3a848946755f11042f
 
 class GenerateNumberHelpers
 {
@@ -98,6 +102,12 @@ class GenerateNumberHelpers
 
                     $number = substr($lastTransactionId->code, 4);
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> e90795732136f4062f531d3a848946755f11042f
                 return "T-"  . sprintf('%04d', intval($number) + 1);
             } catch (\Exception $e) {
                 dd($e);
