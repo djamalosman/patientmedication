@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\ScheduleController
+;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +41,11 @@ Route::get('/Obat/edit/{id}', [ObatController::class, 'edit'])->where('number', 
 //Route::put('Obat/update/{id}', [ObatController::class, 'update'])->where('id', '.*')->name('Obat.update');
 Route::put('Obat/update/{id}', [ObatController::class, 'update'])->name('Obat.update');
 Route::put('Obat/delete/{id}', [ObatController::class, 'delete'])->name('Obat.delete');
+
+// schedule
+Route::get('Schedule', [ScheduleController::class, 'index'])->name('Schedule');
+Route::get('Schedule/create', [ScheduleController::class, 'create'])->name('Schedule.create');
+Route::post('Schedule/store', [ScheduleController::class, 'store'])->name('Schedule.store');
+Route::get('/Schedule/edit/{id}', [ScheduleController::class, 'edit'])->where('number', '.*');
+Route::put('Schedule/update/{id}', [ScheduleController::class, 'update'])->name('Schedule.update');
+Route::put('Schedule/delete/{id}', [ScheduleController::class, 'delete'])->name('Schedule.delete');

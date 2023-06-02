@@ -86,25 +86,7 @@ class PasienController extends Controller
         try {
             DB::beginTransaction();
             $getNumber = GenerateNumberHelpers::Pasien();
-            $validatedData = $request->validate([
-                'name' => ['required', Rule::unique('m_pasien', 'name')]
-
-            ]);
-            if ($validatedData) {
-                // Pasien::where('id', $id)->update([
-       
-                //     'name' => $request->name,
-                //     'alamat' => $request->alamat,
-                //     'tempat' => $request->tempat,
-                //     'tgllahir' => $request->tgllahir,
-                //     'kota' => $request->kota,
-                //     'ktp' => $request->ktp,
-                //     'phone' => $request->phone,
-                //     'updated_by' => Auth::user()->name
-
-                // ]);
-
-                $flight = Pasien::find($id);
+            $flight = Pasien::find($id);
                     $flight->code =$getNumber;
                     $flight->name = $request->name;
                     $flight->alamat = $request->alamat;
@@ -122,9 +104,33 @@ class PasienController extends Controller
                     'url' => url('Pasien'),
                     'message' => 'Update Data Berhasil'
                 ]);
-            }
+            // $validatedData = $request->validate([
+            //     'tgllahir' => ['required', Rule::unique('m_pasien', 'tgllahir')]
+
+            // ]);
+            // if ($validatedData) {
+            //         $flight = Pasien::find($id);
+            //         $flight->code =$getNumber;
+            //         $flight->name = $request->name;
+            //         $flight->alamat = $request->alamat;
+            //         $flight->tempat = $request->tempat;
+            //         $flight->tgllahir = $request->tgllahir;
+            //         $flight->kota=$request->kota;
+            //         $flight->ktp=$request->ktp;
+            //         $flight->phone=$request->phone;
+            //         $flight->updated_by = Auth::user()->name; 
+            //         $flight->save();
+                    
+             
+            //     DB::commit();
+            //     return response()->json([
+            //         'url' => url('Pasien'),
+            //         'message' => 'Update Data Berhasil'
+            //     ]);
+            // }
         } catch (\Throwable $th) {
             DB::rollBack();
+            
             return response()->json([
                 'url' => url('Pasien'),
                 'message' => 'Update Data Gagal!!'

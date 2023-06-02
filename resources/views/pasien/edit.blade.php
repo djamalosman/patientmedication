@@ -18,7 +18,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Create</h3>
+                            <h3>Update</h3>
 
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
@@ -83,7 +83,7 @@
                                                             </div>
                                                             <div class="col-md-5 form-group">
                                                                 <input type="date" class="form-control" id="tgllahir"
-                                                                    name="tgllahir" value="{{ date('Y-m-d'),strtotime($data->alamat)}}">
+                                                                    name="tgllahir" value="{{ date('Y-m-d'),strtotime($data->tgllahir)}}">
                                                             </div>
 
                                                   
@@ -199,7 +199,7 @@
 
         function validateForm() {
             var name = document.getElementById("name").value;
-            var name = document.getElementById("phone").value;
+            var phone = document.getElementById("phone").value;
             if (input == "") {
                 alert("Input text cannot be empty!");
                 return false;
