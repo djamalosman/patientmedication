@@ -69,7 +69,7 @@
                             <span>Form Input</span>
                         </a>
                         <ul class="submenu 
-                            @if($status == 2 || $status == 3)
+                            @if($status == 2 || $status == 3 ||  $status == 4)
                                 active
                             @endif ">
                             <li class="submenu-item
@@ -84,8 +84,11 @@
                                 @endif ">
                                 <a href="/Pasien">Pasien</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="form-element-input.html">Jadwal Obat Pasien</a>
+                            <li class="submenu-item
+                                @if($status == 4)
+                                    active
+                                @endif ">
+                                <a href="/Schedule">Jadwal Obat Pasien</a>
                             </li>
                         </ul>
                     </li>

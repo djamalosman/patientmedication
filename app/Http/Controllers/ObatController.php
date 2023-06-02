@@ -82,12 +82,12 @@ class ObatController extends Controller
 
     public function update($id, Request $request)
     {
-        // dd($id);
+        
         try {
             DB::beginTransaction();
             $getNumber = GenerateNumberHelpers::Obat();
             $validatedData = $request->validate([
-                'name' => ['required', Rule::unique('m_obat', 'name')]
+                'brand' => ['required', Rule::unique('m_obat', 'brand')]
 
             ]);
             if ($validatedData) {

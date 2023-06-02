@@ -181,7 +181,7 @@
 
         function validateForm() {
             var name = document.getElementById("name").value;
-            var name = document.getElementById("category").value;
+            var category = document.getElementById("category").value;
             if (input == "") {
                 alert("Input text cannot be empty!");
                 return false;
