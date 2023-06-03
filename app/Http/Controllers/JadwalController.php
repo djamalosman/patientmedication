@@ -26,10 +26,26 @@ class JadwalController extends Controller
               ->leftJoin('t_schedule_detail', 't_schedule_detail.transactionnumber', '=', 't_schedule.transactionnumber')
               ->leftJoin('m_obat', 'm_obat.id', '=', 't_schedule_detail.id_obat')
               ->where('t_schedule.deletestatus', 0)
-              ->get(['t_schedule.id','t_schedule.transactionnumber','m_pasien.name','t_schedule.description']);
-              //foreach ($data as $value) {
-                 dd($data);
-              //}
+              ->get([
+                    't_schedule.id',
+                    't_schedule.transactionnumber',
+                    'm_pasien.name as namapasien',
+                    'm_pasien.phone as nomortelepon',
+                    'm_obat.name as namaobat',
+                    'm_obat.description as descriptionobat',
+                    't_schedule.description',
+                    't_schedule.transactionnumber',
+                    't_schedule_detail.aturanpakai',
+                    't_schedule_detail.stardate',
+                    't_schedule_detail.enddate',
+                    't_schedule_detail.Qty_hari'
+                ]);
+                
+              foreach ($data as $value) {
+                $pesan = 'Kepada ibu/bapak, pemberitahuan meminum obat "' . $value->namaobat . '" pada hari ini, untuk aturan pakainya sebagai berikut: "' . $value->aturanpakai . '"';
+                dd($pesan);
+              }
+        
         // $basic  = new \Vonage\Client\Credentials\Basic("ba889985", "l3LAv6RvXH1kIusf");
         // $client = new \Vonage\Client($basic);
         // $response = $client->sms()->send(

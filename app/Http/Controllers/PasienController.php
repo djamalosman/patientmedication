@@ -61,6 +61,7 @@ class PasienController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollBack();
+            dd($th);
             return response()->json([
                 'url' => url('Pasien'),
                 'message' => 'Simpan Data Gagal!!'
