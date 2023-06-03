@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ObatController;
-use App\Http\Controllers\ScheduleController
-;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\JadwalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +49,6 @@ Route::post('Schedule/store', [ScheduleController::class, 'store'])->name('Sched
 Route::get('/Schedule/edit/{id}', [ScheduleController::class, 'edit'])->where('number', '.*');
 Route::put('Schedule/update/{id}', [ScheduleController::class, 'update'])->name('Schedule.update');
 Route::put('Schedule/delete/{id}', [ScheduleController::class, 'delete'])->name('Schedule.delete');
+
+Route::get('Jadwal', [JadwalController::class, 'index'])->name('Jadwal');
+Route::get('Jadwal/create', [JadwalController::class, 'create'])->name('Jadwal.create');
