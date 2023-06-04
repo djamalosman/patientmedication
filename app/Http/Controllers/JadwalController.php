@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 
 use DateTime;
+use DateTimeZone;
 use App\Models\Pasien;
 use App\Models\Obat;
 use App\Models\Schedule;
@@ -40,10 +41,28 @@ class JadwalController extends Controller
                     't_schedule_detail.enddate',
                     't_schedule_detail.Qty_hari'
                 ]);
-                
+               
               foreach ($data as $value) {
                 $pesan = 'Kepada ibu/bapak, pemberitahuan meminum obat "' . $value->namaobat . '" pada hari ini, untuk aturan pakainya sebagai berikut: "' . $value->aturanpakai . '"';
-                dd($pesan);
+                    //$datenow=date("Y-m-d H:i:s");
+                    $timezone = new DateTimeZone('Asia/Jakarta');
+                    $datetime = new DateTime('now', $timezone);
+                    $datenow = $datetime->format('Y-m-d H:i:00');
+                    
+                    if($datenow == $value->enddate ||$datenow > $value->enddate )
+                    {
+                        
+                    }
+                    elseif($datenow == $value->stardate)
+                    {
+                        echo $pesan;
+                    }
+                    else
+                    {
+                        echo "gagal";
+                    }
+                    //dd($datenow);
+                    
               }
         
         // $basic  = new \Vonage\Client\Credentials\Basic("ba889985", "l3LAv6RvXH1kIusf");

@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->call('command:obatpasien')->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 
